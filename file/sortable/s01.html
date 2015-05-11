@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <link rel="stylesheet" href="../../res/css/jquery-ui.css"/>
+    <link rel="stylesheet" href="../../res/css/jquery-ui.theme.css"/>
+
+    <script src="../../res/js/jquery.js"></script>
+    <script src="../../res/js/jquery-ui.js"></script>
+
+    <!--<style>-->
+    <!--#sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }-->
+    <!--#sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }-->
+    <!--#sortable li span { position: absolute; margin-left: -1.3em; }-->
+    <!--</style>-->
+
+    <script>
+        $(function () {
+            $('#sortable').sortable();
+//            $('#sortable').disableSelection();
+            $('#stable').sortable();
+            $('.t').draggable({revert: "invalid",helper: "clone"});
+            $('.draggable').draggable({revert: "invalid",helper: "clone"});
+            $('#stable tr td').droppable({
+                accept: ".draggable",
+                activeClass: "ui-state-hover",
+                hoverClass: "ui-state-active",
+                drop:function(event,ui){
+                    $ob = $(ui.draggable);
+                    $obnew = jQuery.extend(true,{},$ob);
+                    $obnew.appendTo($(this));
+                    console.log("dropp");
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+
+<ul id="sortable">
+    <li>item1</li>
+    <li>item2</li>
+    <li>item3</li>
+    <li>item4</li>
+    <li>item5</li>
+</ul>
+<hr>
+<div class="t">ttt</div>
+<p>
+    <span class="draggable">按钮</span>
+    <span class="draggable">单选框</span><span class="draggable">复选框</span>
+</p>
+
+<hr>
+
+<table>
+    <tbody id="stable">
+        <tr>
+            <td width="100px">a</td>
+            <td width="100px">a</td>
+            <td width="100px">a</td>
+        </tr>
+
+        <tr>
+            <td colspan="3" style="background-color: bisque">b</td>
+            <!--<td>b</td>-->
+            <!--<td>b</td>-->
+        </tr>
+
+        <tr>
+            <td width="100px">c</td>
+            <td>c</td>
+            <td>c</td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>
